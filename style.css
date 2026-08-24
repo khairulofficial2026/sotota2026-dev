@@ -1,0 +1,476 @@
+/* A4 পেজ সাইজ অপটিমাইজেশন প্রিন্টিংয়ের জন্য */
+@page {
+  size: A4;
+  margin: 8mm;
+  orphans: 3;
+  widows: 3;
+}
+
+:root{
+  --green:#1a9c5b;
+  --teal-blue:#0e7fa3;
+  --gold:#f4c531;
+  --red:#e8384f;
+  --ink:#1c2b26;
+  --muted:#0a0101;
+  --bg:#eef2f0;
+  --card:#ffffff;
+  --line:#0c0f12;
+  --radius:22px;
+  --merit-blue:#0d0661;
+  --merit-gold:#d4a574;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%;line-height:1.3;}
+body{
+  font-family:'Hind Siliguri',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Hero */
+.hero{
+  background:linear-gradient(115deg,var(--green) 0%,var(--teal-blue) 100%);
+  color:#fff;
+  text-align:center;
+  padding:36px 20px 30px;
+}
+.hero-cap{margin-bottom:8px;}
+.hero-cap svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));}
+.hero h1{
+  font-family:'Baloo Da 2',sans-serif;
+  font-size:1.75rem;
+  font-weight:800;
+  margin:4px 0 8px;
+  text-shadow:0 1px 2px rgba(0,0,0,.1);
+}
+.hero p{
+  margin:0;
+  font-size:.95rem;
+  font-weight:500;
+  opacity:.95;
+}
+
+/* Ticker */
+.ticker{
+  display:flex;align-items:stretch;
+  overflow:hidden;
+  font-size:.85rem;
+}
+.ticker-badge{
+  background:var(--red);color:#fff;
+  padding:10px 14px;flex-shrink:0;
+  font-weight:700;white-space:nowrap;
+  display:flex;align-items:center;
+}
+.ticker-track{
+  overflow:hidden;white-space:nowrap;flex:1;
+  background:var(--gold);
+  display:flex;align-items:center;
+}
+.ticker-track span{
+  display:inline-block;padding-left:100%;
+  font-weight:700;color:#3a2a00;
+  animation:scrollLeft 20s linear infinite;
+}
+@keyframes scrollLeft{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
+
+/* Page switching */
+.page{display:none;}
+.page.active{display:block;}
+
+.btn-back{
+  display:inline-flex;align-items:center;gap:6px;
+  margin:20px 0 6px;padding:10px 18px;
+  border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:#0f8a52;font-weight:700;font-size:.88rem;
+  font-family:'Hind Siliguri',sans-serif;cursor:pointer;
+}
+.btn-back:active{transform:scale(.97);}
+
+/* Layout */
+.wrap{
+  max-width:520px;
+  margin:0 auto;
+  padding:36px 16px 40px;
+}
+/* রেজাল্ট পেইজ A4-এর কাছাকাছি প্রশস্ত রাখা হয়েছে, যাতে কার্ডটি ছোট বাক্সের মতো না লাগে */
+.wrap-report{
+  max-width:780px;
+  padding:28px 16px 40px;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 16px 40px rgba(20,60,50,.14);
+  padding:32px 24px;
+  margin-bottom:20px;
+}
+.card-title{
+  font-family:'Hind Siliguri',sans-serif;
+  font-weight:700;font-size:1.3rem;
+  color:#158a4e;
+  text-align:center;margin-bottom:24px;
+}
+.star{color:var(--gold);margin-right:4px;}
+
+.field-label{
+  display:block;font-size:.82rem;font-weight:700;
+  color:var(--muted);margin:16px 0 8px;
+}
+.input{
+  width:100%;padding:15px 16px;
+  border:1.5px solid var(--line);border-radius:14px;
+  font-size:1rem;font-family:'Hind Siliguri',sans-serif;
+  background:#fbfdfc;color:var(--ink);
+  font-weight:600;
+  appearance:none;
+  -webkit-appearance:none;
+}
+select.input{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a8a84' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:38px;
+}
+.input:focus{outline:none;border-color:var(--green);}
+
+.btn-primary{
+  width:100%;margin-top:26px;padding:16px;
+  border:none;border-radius:14px;
+  background:linear-gradient(135deg,#0d8a52,#0a7a48);
+  color:#fff;font-size:1.05rem;font-weight:700;
+  font-family:'Hind Siliguri',sans-serif;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(10,122,72,.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-primary:active{transform:scale(.98);}
+.btn-primary:disabled{opacity:.6;}
+
+/* ভর্তি ফরম বাটনের আইকন ছোট করা */
+.btn-primary .icon{
+  font-size:0.9rem;
+}
+
+.status-msg{
+  text-align:center;font-size:.85rem;margin:16px 0 0;
+  color:var(--red);font-weight:600;min-height:1em;
+}
+
+/* Result report card — reference-image style, sized to fill an A4 page nicely */
+.result-card.hidden{display:none;}
+.result-card{padding:0;background:transparent;box-shadow:none;}
+.report-outer{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:22px;
+  box-shadow:0 16px 40px rgba(20,60,50,.14);
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+.report-inner{
+  border:3px solid #17a06f;
+  border-radius:10px;
+  padding:22px 28px;
+  position:relative;
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+
+/* টপবার: ছবি বক্স | স্কুলের নাম | রেজাল্ট স্ট্যাম্প */
+.report-topbar{
+  display:flex;align-items:center;gap:18px;
+  margin-bottom:10px;
+}
+.photo-box{
+  flex-shrink:0;
+  width:88px;height:92px;
+  border:2px solid var(--ink);
+  border-radius:6px;
+  background:#fbfdfc;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.photo-box img{
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:4px;
+}
+.report-header{flex:1;text-align:center;min-width:0;}
+.report-header h2{
+  font-family:'Baloo Da 2',sans-serif;
+  color:#0f8a52;font-size:1.9rem;margin:0 0 4px;
+}
+.report-address{font-size:.92rem;color:#3a4a44;margin:0 0 3px;}
+.report-meta{font-size:.88rem;color:var(--muted);margin:0;font-weight:600;}
+
+/* ফলাফল + মেরিট একসাথে একটি স্ট্যাম্প-এ */
+.stamp-combo{
+  flex-shrink:0;
+  width:112px;
+  border:2px dashed;border-radius:50%;
+  padding:14px 8px;text-align:center;
+  line-height:1.15;
+  font-family:'JetBrains Mono',monospace;
+}
+.stamp-combo span{display:block;font-size:.62rem;font-weight:700;letter-spacing:.6px;}
+.stamp-combo strong{display:block;font-size:.92rem;letter-spacing:.3px;margin-top:1px;}
+.stamp-combo em{
+  display:block;margin-top:5px;font-style:normal;
+  font-size:.56rem;font-weight:800;letter-spacing:.2px;
+  background:var(--merit-blue);color:#fff;border-radius:5px;padding:2px 3px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact;
+}
+.stamp-combo.pass{border-color:#17a06f;color:#0f8a52;}
+.stamp-combo.fail{border-color:var(--red);color:var(--red);}
+
+/* সেকশন টাইটেল: Student Information / Grade Sheet */
+.section-title{
+  text-align:center;
+  font-family:'Baloo Da 2',sans-serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:1.2rem;
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  margin:14px 0 8px;
+}
+
+/* শিক্ষার্থীর তথ্য টেবিল */
+.info-table{
+  width:100%;border-collapse:collapse;
+  margin-bottom:4px;
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+.info-table td{
+  border:1.5px solid var(--ink);
+  padding:9px 16px;
+  width:50%;
+  vertical-align:middle;
+}
+.info-label{
+  font-size:.86rem;color:var(--muted);font-weight:700;
+  margin-right:6px;
+}
+.info-value{
+  font-size:1.05rem;color:#0f8a52;font-weight:700;
+}
+
+.table-scroll{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:6px 0;
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+.marks-table{width:100%;min-width:0;border-collapse:collapse;font-size:.94rem;line-height:1.3;}
+.marks-table th{
+  text-align:center;background:#0f8a52;color:#fff;
+  padding:8px 6px;font-weight:700;font-size:.8rem;
+  letter-spacing:.2px;border:1px solid #0a6e3f;
+}
+.marks-table td{padding:5px 6px;border:1px solid var(--line);text-align:center;line-height:1.2;}
+.marks-table td.subj-name,.marks-table th:first-child{text-align:left;}
+.marks-table tr:nth-child(even){background:#f7fbfa;}
+.marks-table tfoot tr{font-weight:800;border-top:2px solid var(--ink);}
+.marks-table tfoot td{padding:8px 6px;border:1px solid var(--line);}
+
+.cell-pass{color:#0a8a4a;font-weight:700;}
+.cell-fail{color:var(--red);font-weight:700;}
+
+.grade-scale{
+  font-size:.78rem;color:var(--muted);text-align:center;
+  margin:6px 0;line-height:1.25;
+}
+
+.remarks-box{
+  margin:6px 0;padding:12px 16px;min-height:48px;
+  border:2px solid var(--ink);
+  border-radius:6px;font-size:1rem;
+  page-break-inside:avoid;
+  break-inside:avoid;
+  line-height:1.3;
+}
+.remarks-box span{font-weight:700;color:var(--ink);}
+.remarks-box em{color:#3a4a44;font-style:normal;display:block;margin-top:3px;line-height:1.3;}
+
+/* স্বাক্ষরের জন্য যথেষ্ট ফাঁকা জায়গা রাখা হয়েছে লাইনের ওপরে */
+.sign-row{
+  display:flex;justify-content:space-between;
+  margin:48px 0 4px;gap:16px;flex-wrap:wrap;
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+.sign-row div{
+  flex:1;min-width:110px;text-align:center;
+  font-size:.85rem;color:var(--muted);line-height:1;
+}
+.sign-line{
+  display:block;border-top:1.5px solid var(--ink);
+  margin-bottom:8px;
+}
+
+.report-footer{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;
+  font-size:.7rem;color:#a3b0ab;
+  border-top:1px solid var(--line);padding-top:5px;margin-top:8px;
+}
+
+/* Bengali Number Font Customization */
+/* এই ক্লাস গুলোতে শুধু বাংলা সংখ্যা (০,১,২,৩...) এর জন্য কাস্টম ফন্ট */
+.bn-number {
+  font-family: 'Tiro Bangla', serif;
+}
+
+/* ডাউনলোড/প্রিন্ট বাটন */
+.result-actions{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;
+}
+.result-actions .btn-primary,
+.result-actions .btn-secondary{
+  flex:1;min-width:150px;margin-top:0;
+}
+.btn-secondary{
+  padding:16px;
+  border:1.5px solid #0f8a52;border-radius:14px;
+  background:#fff;color:#0f8a52;font-size:1.05rem;font-weight:700;
+  font-family:'Hind Siliguri',sans-serif;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-secondary:active{transform:scale(.98);}
+
+@media print{
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important;}
+  .no-print{display:none !important;}
+  body{background:#fff;padding:0;margin:0;}
+  .wrap{padding:0;max-width:100%;margin:0;}
+  .report-outer{
+    box-shadow:none;border:none;padding:0;
+    page-break-inside:avoid;
+    break-inside:avoid;
+  }
+  .report-inner{
+    border:2px solid #17a06f;
+    page-break-inside:avoid;
+    break-inside:avoid;
+  }
+  .marks-table{page-break-inside:avoid;break-inside:avoid;}
+  .remarks-box{page-break-inside:avoid;break-inside:avoid;}
+  .sign-row{page-break-inside:avoid;break-inside:avoid;}
+  .card{box-shadow:none;}
+}
+ 
+.footer{text-align:center;padding:20px;font-size:.78rem;color:var(--muted);}
+
+@media (max-width:600px){
+  .report-inner{padding:16px 14px;}
+  .report-header h2{font-size:1.3rem;}
+  .report-address{font-size:.72rem;}
+  .report-meta{font-size:.68rem;}
+  .report-topbar{gap:8px;}
+  .photo-box{width:60px;height:62px;}
+  .stamp-combo{width:78px;padding:8px 5px;}
+  .stamp-combo span{font-size:.46rem;}
+  .stamp-combo strong{font-size:.66rem;}
+  .stamp-combo em{font-size:.42rem;}
+  .section-title{font-size:1rem;margin:14px 0 8px;}
+  .info-table td{padding:7px 9px;}
+  .info-label{font-size:.66rem;}
+  .info-value{font-size:.82rem;}
+  .marks-table{font-size:.66rem;}
+  .marks-table th,.marks-table td{padding:5px 3px;}
+  .remarks-box{padding:10px 12px;font-size:.78rem;}
+  .sign-row{margin-top:34px;}
+  .sign-row div{font-size:.66rem;min-width:70px;}
+  .result-actions{flex-direction:column;}
+}
+
+.hidden{display:none !important;}
+
+/* পরীক্ষার রুটিন পেইজ */
+.routine-header{text-align:center;margin-bottom:14px;}
+.routine-header h2{
+  font-family:'Baloo Da 2',sans-serif;
+  color:#0f8a52;font-size:1.5rem;margin:0 0 4px;
+}
+.routine-title{font-size:.95rem;color:var(--ink);font-weight:700;margin:0;}
+
+.routine-table{width:100%;min-width:760px;border-collapse:collapse;font-size:.78rem;line-height:1.25;}
+.routine-table th{
+  text-align:center;background:#0f8a52;color:#fff;
+  padding:8px 6px;font-weight:700;font-size:.72rem;
+  border:1px solid #0a6e3f;
+}
+.routine-table td{padding:7px 6px;border:1px solid var(--line);text-align:center;}
+.routine-table td.subj-name{font-weight:700;color:#0f8a52;background:#f7fbfa;}
+.routine-table tr:nth-child(even){background:#f7fbfa;}
+
+.routine-rules{
+  margin-top:18px;padding:14px 16px;
+  border:1.5px solid var(--ink);border-radius:6px;
+}
+.routine-rules h3{
+  font-family:'Baloo Da 2',sans-serif;
+  font-size:1rem;margin:0 0 8px;color:var(--ink);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.routine-rules ol{margin:0;padding-left:20px;}
+.routine-rules li{font-size:.82rem;line-height:1.5;margin-bottom:6px;color:#3a4a44;}
+
+@media (max-width:600px){
+  .routine-header h2{font-size:1.1rem;}
+  .routine-title{font-size:.78rem;}
+  .routine-table{font-size:.68rem;}
+  .routine-table th,.routine-table td{padding:5px 4px;}
+  .routine-rules li{font-size:.72rem;}
+}
+
+/* একাধিক রেজাল্ট কার্ড প্রিন্টের জন্য (এডমিন প্যানেল) */
+#adminPrintArea{margin-top:20px;}
+.print-page{margin-bottom:24px;}
+@media print{
+  .print-page{page-break-after:always;}
+  .print-page:last-child{page-break-after:auto;}
+}
+
+/* রেজাল্ট কার্ডের সব বাংলা টেক্সট Hind Siliguri এ */
+.report-inner {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+/* Bengali Number Font Customization */
+/* শুধু বাংলা সংখ্যা (०,१,२,३...) এর জন্য কাস্টম ফন্ট */
+.bn-number {
+  font-family: 'Tiro Bangla', serif;
+}
+
+/* বাংলা সংখ্যার বিভিন্ন ফন্ট অপশন */
+.bn-number.tiro-bangla-font {
+  font-family: 'Tiro Bangla', serif;
+  font-weight: 400;
+}
+
+.bn-number.hind-siliguri-font {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 600;
+}
+
+.bn-number.baloo-da-2-font {
+  font-family: 'Baloo Da 2', sans-serif;
+  font-weight: 700;
+}
+
+/* কাস্টম ফন্টের জন্য স্পেস (যদি ইউজ করতে চাও) */
+.bn-number.custom-font {
+  font-family: 'Custom Bangla Font', serif;
+}
