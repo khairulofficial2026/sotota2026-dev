@@ -380,11 +380,24 @@ function buildReportCardHTML(row){
 // ============ ডেটা লোড (একাধিক শীট থেকে) ============
 function parseOneSheet(url){
   return new Promise((resolve) => {
+    let done = false;
+
+    // নেটওয়ার্ক স্লো/আটকে গেলে যাতে চিরকাল "লোড হচ্ছে..." দেখিয়ে না থাকে,
+    // তাই একটি টাইমআউট (২৫ সেকেন্ড) রাখা হলো
+    const timer = setTimeout(() => {
+      if(done) return;
+      done = true;
+      resolve([]);
+    }, 25000);
+
     Papa.parse(url, {
       download: true,
       header: true,
       skipEmptyLines: true,
       complete: function(results){
+        if(done) return;
+        done = true;
+        clearTimeout(timer);
         const rows = results.data.map(row => {
           const clean = {};
           Object.keys(row).forEach(k => clean[norm(k)] = String(row[k] || "").trim());
@@ -393,6 +406,9 @@ function parseOneSheet(url){
         resolve(rows);
       },
       error: function(){
+        if(done) return;
+        done = true;
+        clearTimeout(timer);
         resolve([]); // এই শীটে সমস্যা হলে বাকিগুলো লোড হতে থাকুক
       }
     });
@@ -413,7 +429,7 @@ async function loadData(){
   allRows = results.flat();
 
   if(allRows.length === 0){
-    classSelect.innerHTML = `<option value="">শীট লোড করা যায়নি, লিংক চেক করুন</option>`;
+    classSelect.innerHTML = `<option value="">⚠️ লোড ব্যর্থ হয়েছে, নিচে ক্লিক করুন</option><option value="__retry__">🔄 আবার চেষ্টা করুন</option>`;
     return;
   }
 
@@ -422,6 +438,12 @@ async function loadData(){
   populateClasses(classSelect);
   populateClasses(adminClassSelect, true);
 }
+
+classSelect.addEventListener("change", () => {
+  if(classSelect.value === "__retry__"){
+    loadData();
+  }
+});
 
 function populateClasses(selectEl, includeAllOption){
   const classes = [...new Set(allRows.map(r => r["class"]).filter(Boolean))];
