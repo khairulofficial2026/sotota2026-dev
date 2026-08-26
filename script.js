@@ -678,8 +678,8 @@ printBtn.addEventListener("click", () => window.print());
 downloadBtn.addEventListener("click", downloadCurrentReportPDF);
 document.getElementById("backBtn").addEventListener("click", () => goToPage("searchPage"));
 
-viewRoutineBtn.addEventListener("click", showRoutine);
-routineBackBtn.addEventListener("click", () => goToPage("searchPage"));
+if (viewRoutineBtn) viewRoutineBtn.addEventListener("click", showRoutine);
+if (routineBackBtn) routineBackBtn.addEventListener("click", () => goToPage("searchPage"));
 routinePrintBtn.addEventListener("click", () => window.print());
 
 adminBackBtn.addEventListener("click", () => {
@@ -699,5 +699,14 @@ function checkSecretAdminEntry(){
 }
 window.addEventListener("hashchange", checkSecretAdminEntry);
 checkSecretAdminEntry();
+
+// #routine দিয়ে সরাসরি রুটিন পেইজ খোলার জন্য (যেমনঃ index.html থেকে "পরীক্ষার রুটিন" বাটনে চাপ দিলে)
+function checkRoutineEntry(){
+  if(window.location.hash === "#routine"){
+    showRoutine();
+  }
+}
+window.addEventListener("hashchange", checkRoutineEntry);
+checkRoutineEntry();
 
 loadData();
