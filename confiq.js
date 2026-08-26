@@ -4,11 +4,10 @@
 // একটা শীট হলেও এভাবেই বসাবেন — শুধু একটা লিংক থাকবে লিস্টে
 // কীভাবে CSV লিংক বের করবেন তার নিয়ম README.md ফাইলে দেওয়া আছে
 // ================================
-const SHEET_CSV_URLS = ["https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2uenDiLu93wXEBWrAB1stf1ltmKcLQWpGMRfs1uNCgeUWeYLLmAfi0p2I1D6Lxmp8Xw-sR8bxVCn/pub?gid=30031640&single=true&output=csv",
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmA_P_ghMLKrBr48GYtRJWAx4iLu83Af9CHmGeKDpr6ZmdpRWF78QNUoSMIFeayRCk8m7AK8A5YpbE/pub?gid=838426032&single=true&output=csv",
-  "PASTE_CLASS_5_SHEET_CSV_LINK_HERE",
-  "PASTE_CLASS_6_SHEET_CSV_LINK_HERE",
-  "PASTE_CLASS_7_SHEET_CSV_LINK_HERE"
+// ✅ FIXED: শুধুমাত্র ২টি ক্লাসের শীট (বাকিগুলো পরে যুক্ত করবেন)
+const SHEET_CSV_URLS = [
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2uenDiLu93wXEBWrAB1stf1ltmKcLQWpGMRfs1uNCgeUWeYLLmAfi0p2I1D6Lxmp8Xw-sR8bxVCn/pub?gid=30031640&single=true&output=csv",
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmA_P_ghMLKrBr48GYtRJWAx4iLu83Af9CHmGeKDpr6ZmdpRWF78QNUoSMIFeayRCk8m7AK8A5YpbE/pub?gid=838426032&single=true&output=csv"
 ];
 
 // ================================
