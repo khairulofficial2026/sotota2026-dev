@@ -398,6 +398,7 @@ function parseOneSheet(url){
         if(done) return;
         done = true;
         clearTimeout(timer);
+        console.log("✅ Sheet loaded successfully:", url, "Rows found:", results.data.length);
         const rows = results.data.map(row => {
           const clean = {};
           Object.keys(row).forEach(k => clean[norm(k)] = String(row[k] || "").trim());
@@ -405,10 +406,11 @@ function parseOneSheet(url){
         });
         resolve(rows);
       },
-      error: function(){
+      error: function(error){
         if(done) return;
         done = true;
         clearTimeout(timer);
+        console.error("❌ Sheet load error:", url, error);
         resolve([]); // এই শীটে সমস্যা হলে বাকিগুলো লোড হতে থাকুক
       }
     });
@@ -417,8 +419,10 @@ function parseOneSheet(url){
 
 async function loadData(){
   const validUrls = (SHEET_CSV_URLS || []).filter(u => u && !u.includes("PASTE_"));
+  console.log("🔍 Starting data load. Valid sheet URLs:", validUrls.length);
 
   if(validUrls.length === 0){
+    console.error("❌ No valid sheet URLs found!");
     classSelect.innerHTML = `<option value="">⚠️ config.js এ শীট লিংক বসান</option>`;
     return;
   }
@@ -427,8 +431,12 @@ async function loadData(){
 
   const results = await Promise.all(validUrls.map(parseOneSheet));
   allRows = results.flat();
+  
+  console.log("📊 Total rows loaded:", allRows.length);
+  console.log("📝 Sample data:", allRows.slice(0, 2));
 
   if(allRows.length === 0){
+    console.error("❌ No data loaded from sheets!");
     classSelect.innerHTML = `<option value="">⚠️ লোড ব্যর্থ হয়েছে, নিচে ক্লিক করুন</option><option value="__retry__">🔄 আবার চেষ্টা করুন</option>`;
     return;
   }
@@ -437,6 +445,7 @@ async function loadData(){
 
   populateClasses(classSelect);
   populateClasses(adminClassSelect, true);
+  console.log("✨ Data load complete!");
 }
 
 classSelect.addEventListener("change", () => {
