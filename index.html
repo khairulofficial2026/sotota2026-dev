@@ -1,145 +1,624 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>সততা প্রি ক্যাডেট স্কুল | ফলাফল পোর্টাল</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Tiro+Bangla:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sotota Pre Cadet School</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #1a9c5b;
+      --primary-dark: #147a47;
+      --accent: #e74c3c;
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(255, 255, 255, 0.95);
+      --header-bg: rgba(255, 255, 255, 0.85);
+      --notice-bg: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+      --notice-text: #856404;
+      --glass-hover: rgba(255, 255, 255, 0.95);
+      --footer-bg: rgba(255, 255, 255, 0.85);
+      --radius: 20px;
+      --smooth-spring: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    [data-theme="dark"] {
+      --primary: #2ecc71;
+      --primary-dark: #27ae60;
+      --accent: #ff6b6b;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(30, 41, 59, 0.75);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --header-bg: rgba(15, 23, 42, 0.85);
+      --notice-bg: linear-gradient(135deg, #422006 13%, #713f12 100%);
+      --notice-text: #fde047;
+      --glass-hover: rgba(30, 41, 59, 0.95);
+      --footer-bg: rgba(15, 23, 42, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hind Siliguri', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      filter: blur(100px);
+      opacity: 0.5;
+      border-radius: 50%;
+      animation: morphBlob 16s infinite alternate ease-in-out;
+    }
+
+    .blob-1 {
+      width: 420px;
+      height: 420px;
+      background: rgba(26, 156, 91, 0.35);
+      top: -120px;
+      left: -120px;
+    }
+
+    .blob-2 {
+      width: 480px;
+      height: 480px;
+      background: rgba(52, 152, 219, 0.35);
+      bottom: -120px;
+      right: -120px;
+      animation-delay: -8s;
+    }
+
+    @keyframes morphBlob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(45px, 25px) scale(1.12); }
+      100% { transform: translate(-20px, 50px) scale(0.95); }
+    }
+
+    .home-header {
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2.5px;
+      background: var(--text-main);
+      border-radius: 3px;
+      transition: transform 0.3s ease;
+    }
+
+    .header-brand-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+    }
+
+    .header-title-red {
+      font-family: 'Baloo Da 2', cursive;
+      color: var(--accent);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .header-phone-sm {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--header-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transition: left 0.35s var(--smooth-spring);
+      border-right: 1px solid var(--card-border);
+    }
+
+    .sidebar-menu.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .sidebar-title {
+      font-family: 'Baloo Da 2', cursive;
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .sidebar-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .sidebar-links {
+      list-style: none;
+      padding: 15px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .sidebar-links li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.98rem;
+      font-weight: 600;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .sidebar-links li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s var(--smooth-spring);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 55px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      z-index: 99;
+      animation: pulseWhatsapp 2.2s infinite ease-in-out;
+      transition: transform 0.3s var(--smooth-spring);
+    }
+
+    @keyframes pulseWhatsapp {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.12);
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      padding-bottom: 50px;
+      flex: 1;
+    }
+
+    .home-main-single {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      margin-top: 4px;
+      margin-bottom: auto;
+    }
+
+    .home-hero-compact {
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      padding: 16px 16px;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--card-border);
+    }
+
+    .home-title-bangla {
+      font-family: 'Baloo Da 2', cursive;
+      font-size: 1.7rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .home-subtitle-sm {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .home-phone-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .home-ticker-top {
+      background: var(--notice-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 11px 14px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 8px 25px rgba(243, 156, 18, 0.15);
+      border: 2px solid var(--card-border);
+      overflow: hidden;
+    }
+
+    .ticker-badge-sm {
+      background: var(--accent);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-right: 10px;
+      z-index: 2;
+      box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+    }
+
+    .ticker-track {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    .ticker-track span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 16s linear infinite;
+      font-size: 0.9rem;
+      color: var(--notice-text);
+      font-weight: 700;
+    }
+
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+
+    .features-container-custom {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-card-wide {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: white;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(26, 156, 91, 0.3);
+      border: 1px solid var(--card-border);
+      transition: all 0.3s var(--smooth-spring);
+      text-decoration: none;
+    }
+
+    .feature-card-wide:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(26, 156, 91, 0.4);
+    }
+
+    .features-grid-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .feature-card-glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      padding: 16px 10px;
+      border-radius: var(--radius);
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--card-border);
+      transition: all 0.3s var(--smooth-spring);
+      text-decoration: none;
+      display: block;
+    }
+
+    .feature-card-glass:hover {
+      transform: translateY(-3px);
+      background: var(--glass-hover);
+      border-color: var(--primary);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.07);
+    }
+
+    .feature-icon-sm {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+      transition: transform 0.3s var(--smooth-spring);
+    }
+
+    .feature-card-glass:hover .feature-icon-sm,
+    .feature-card-wide:hover .feature-icon-sm {
+      transform: scale(1.15);
+    }
+
+    .feature-title-sm {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .feature-card-wide .feature-title-sm {
+      color: white;
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .home-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+      background: var(--footer-bg);
+      backdrop-format: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid var(--card-border);
+      z-index: 98;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ============ পেইজ ১: সার্চ পেইজ ============ -->
-  <div id="searchPage" class="page active">
+  <div class="animated-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
 
-    <header class="hero no-print">
-      <div class="hero-cap">
-        <svg viewBox="0 0 64 64" width="52" height="52" fill="none">
-          <path d="M32 10 6 22l26 11 26-11z" fill="#F4B740"/>
-          <path d="M16 27v13c0 4.4 7.2 9 16 9s16-4.6 16-9V27" stroke="#F4B740" stroke-width="3" fill="none"/>
-          <circle cx="58" cy="23" r="2.2" fill="#F4B740"/>
-          <path d="M58 23v9" stroke="#F4B740" stroke-width="2"/>
-        </svg>
-      </div>
-      <h1>সততা প্রি ক্যাডেট স্কুল</h1>
-      <p>নলিন বাজার, গোপালপুর, টাঙ্গাইল</p>
-      <p>পরীক্ষা - ফলাফল প্রকাশনা পোর্টাল</p>
-    </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <nav class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-header">
+      <h3 class="sidebar-title">মেনু অপশন</h3>
+      <button class="sidebar-close" id="sidebarClose">&times;</button>
+    </div>
+    <ul class="sidebar-links">
+      <li><a href="index.html">🏠 হোম পেইজ</a></li>
+      <li><a href="#">📢 নোটিশ বোর্ড</a></li>
+      <li><a href="portal.html">🔍 ফলাফল দেখুন</a></li>
+      <li><a href="portal.html#routine">📅 পরীক্ষার রুটিন</a></li>
+      <li><a href="#">📚 লাইব্রেরী</a></li>
+      <li><a href="#">📞 যোগাযোগ করুন</a></li>
+    </ul>
+  </nav>
 
-    <div class="ticker no-print">
-      <span class="ticker-badge">📢 নোটিশঃ</span>
-      <div class="ticker-track">
-        <span id="tickerText">📢 সততা প্রি-ক্যাডেট স্কুলের ২য় সেমিস্টার পরীক্ষার রুটিন প্রকাশিত হয়েছে। 🎓🚧 সততা প্রি-ক্যাডেট স্কুলে ২০২৭ শিক্ষাবর্ষে ভর্তি চলছে! আমাদের ওয়েবসাইটটি বর্তমানে টেস্টিং ও উন্নয়নের পর্যায়ে রয়েছে। ভর্তি সংক্রান্ত যেকোনো তথ্যের জন্য সরাসরি বিদ্যালয়ে যোগাযোগ করুন। ধন্যবাদ।</span>
+  <header class="home-header">
+    <div class="header-left">
+      <button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="header-brand-box">
+        <h2 class="header-title-red">Sotota Pre Cadet School</h2>
+        <p class="header-phone-sm">📞 01718-813251</p>
       </div>
     </div>
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark Mode">🌙</button>
+  </header>
 
-    <main class="wrap">
-      <section class="card search-card no-print">
-        <div class="card-title">
-          <span class="star">★</span> ফলাফল অনুসন্ধান করুন
+  <a href="https://wa.me/8801718813251" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+
+  <div class="page">
+    <div class="home-main-single">
+      
+      <div class="home-hero-compact">
+        <h1 class="home-title-bangla">সততা প্রি ক্যাডেট স্কুল</h1>
+        <p class="home-subtitle-sm">নলিন বাজার, গোপালপুর, টাঙ্গাইল</p>
+        <p class="home-phone-sub">যোগাযোগ: 01718-813251</p>
+      </div>
+
+      <div class="home-ticker-top">
+        <div class="ticker-badge-sm">📢 নোটিশ</div>
+        <div class="ticker-track">
+          <span>২য় সেমিস্টার পরীক্ষার রুটিন প্রকাশিত হয়েছে। সততা প্রি-ক্যাডেট স্কুলে ২০২৭ শিক্ষাবর্ষে ভর্তি চলছে। ভর্তির জন্য বিদ্যালয়ে যোগাযোগ করুন।</span>
         </div>
+      </div>
 
-        <label class="field-label" for="classSelect">শ্রেণী নির্বাচন করুন (SELECT CLASS)</label>
-        <select id="classSelect" class="input">
-          <option value="">লোড হচ্ছে...</option>
-        </select>
+      <div class="features-container-custom">
+        <a href="portal.html" class="feature-card-wide">
+          <div class="feature-icon-sm">🔍</div>
+          <div class="feature-title-sm">ফলাফল দেখুন</div>
+        </a>
 
-        <label class="field-label" for="rollInput">রোল নম্বর (ROLL NUMBER)</label>
-        <input id="rollInput" class="input" type="number" inputmode="numeric" placeholder="যেমনঃ 2" />
-
-        <button id="searchBtn" class="btn-primary">
-          <span class="icon">🔍</span> ফলাফল দেখুন
-        </button>
-
-        <p id="statusMsg" class="status-msg"></p>
-
-        <button id="viewRoutineBtn" class="btn-secondary">
-          <span class="icon">📅</span> পরীক্ষার রুটিন দেখুন
-        </button>
-      </section>
-    </main>
-
-    <footer class="footer no-print">
-      <p>© 2026 সততা প্রি ক্যাডেট স্কুল — সকল অধিকার সংরক্ষিত</p>
-    </footer>
-  </div>
-  
-  <div style="text-align: center; padding: 10px; font-family: sans-serif; font-size: 14px; color: #666;" class="no-print"><p>Developed by <a href="https://khairulislamjuseb.vercel.app/" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">[Signature]</a></p>
-</div>
-
-
-  <!-- ============ পেইজ ২: রেজাল্ট পেইজ (একক শিক্ষার্থী) ============ -->
-  <div id="resultPage" class="page">
-    <main class="wrap wrap-report">
-      <button id="backBtn" class="btn-back no-print">← আবার খুঁজুন</button>
-
-      <section class="card result-card">
-        <div id="reportContainer"></div>
-        <div class="result-actions no-print">
-          <button id="downloadBtn" class="btn-primary">⬇️ ডাউনলোড করুন (PDF)</button>
-          <button id="printBtn" class="btn-secondary">🖨️ প্রিন্ট করুন</button>
+        <div class="features-grid-dual">
+          <a href="portal.html#routine" class="feature-card-glass">
+            <div class="feature-icon-sm">📅</div>
+            <div class="feature-title-sm">পরীক্ষার রুটিন</div>
+          </a>
+          <a href="#" class="feature-card-glass">
+            <div class="feature-icon-sm">📚</div>
+            <div class="feature-title-sm">নোটিশ-লাইব্রেরী</div>
+          </a>
         </div>
-        <p id="downloadStatus" class="status-msg"></p>
-      </section>
-    </main>
+      </div>
+
+    </div>
   </div>
 
-  <!-- ============ পেইজ ৩: পরীক্ষার রুটিন ============ -->
-  <div id="routinePage" class="page">
-    <main class="wrap wrap-report">
-      <button id="routineBackBtn" class="btn-back no-print">← মূল পেইজে ফিরে যান</button>
-
-      <section class="card result-card">
-        <div id="routineContainer"></div>
-        <div class="result-actions no-print">
-          <button id="routinePrintBtn" class="btn-secondary">🖨️ প্রিন্ট করুন</button>
-        </div>
-      </section>
-    </main>
+  <div class="home-footer">
+    © 2026 Sotota Pre Cadet School — সকল অধিকার সংরক্ষিত<br>
+    <span style="font-size: 0.62rem; opacity: 0.85;">Designed by <a href="https://khairulislamjuseb.vercel.app/" target="_blank" style="color: inherit; text-decoration: underline;">[Signature]</a></span>
   </div>
 
-  <!-- ============ পেইজ ৪: এডমিন প্যানেল ============ -->
-  <div id="adminPage" class="page">
-    <main class="wrap">
-      <button id="adminBackBtn" class="btn-back no-print">← মূল পেইজে ফিরে যান</button>
+  <script>
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const htmlElement = document.documentElement;
 
-      <!-- লগইন ফর্ম -->
-      <section id="adminLogin" class="card search-card no-print">
-        <div class="card-title">🔒 এডমিন লগইন</div>
-        <label class="field-label" for="adminPassword">পাসওয়ার্ড দিন</label>
-        <input id="adminPassword" class="input" type="password" placeholder="পাসওয়ার্ড" />
-        <button id="adminLoginBtn" class="btn-primary">
-          <span class="icon">🔑</span> প্রবেশ করুন
-        </button>
-        <p id="adminLoginMsg" class="status-msg"></p>
-      </section>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      htmlElement.setAttribute('data-theme', savedTheme);
+      themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
 
-      <!-- লগইনের পর কন্ট্রোল প্যানেল -->
-      <section id="adminControls" class="card search-card no-print hidden">
-        <div class="card-title">🖨️ সব রেজাল্ট কার্ড প্রিন্ট করুন</div>
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        htmlElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggleBtn.textContent = '🌙';
+      } else {
+        htmlElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggleBtn.textContent = '☀️';
+      }
+    });
 
-        <label class="field-label" for="adminClassSelect">শ্রেণী নির্বাচন করুন</label>
-        <select id="adminClassSelect" class="input">
-          <option value="">লোড হচ্ছে...</option>
-        </select>
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarClose = document.getElementById('sidebarClose');
 
-        <button id="adminPrintBtn" class="btn-primary">
-          <span class="icon">🖨️</span> রেজাল্ট কার্ড তৈরি করুন
-        </button>
+    function toggleMenu() {
+      sidebarMenu.classList.toggle('active');
+      sidebarOverlay.classList.toggle('active');
+    }
 
-        <p id="adminStatusMsg" class="status-msg"></p>
-      </section>
+    menuToggleBtn.addEventListener('click', toggleMenu);
+    sidebarClose.addEventListener('click', toggleMenu);
+    sidebarOverlay.addEventListener('click', toggleMenu);
+  </script>
 
-      <!-- সব কার্ড এখানে জেনারেট হবে -->
-      <div id="adminPrintArea"></div>
-    </main>
-  </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="config.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
