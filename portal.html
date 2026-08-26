@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সততা প্রি ক্যাডেট স্কুল | ফলাফল পোর্টাল</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Tiro+Bangla:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ পেইজ ১: সার্চ পেইজ ============ -->
+  <div id="searchPage" class="page">
+    <main class="wrap">
+      <a href="index.html" class="btn-back no-print">← মূল পেইজে ফিরে যান</a>
+
+      <section class="card search-card no-print">
+        <div class="card-title">
+          <span class="star">★</span> ফলাফল অনুসন্ধান করুন
+        </div>
+
+        <label class="field-label" for="classSelect">শ্রেণী নির্বাচন করুন (SELECT CLASS)</label>
+        <select id="classSelect" class="input">
+          <option value="">লোড হচ্ছে...</option>
+        </select>
+
+        <label class="field-label" for="rollInput">রোল নম্বর (ROLL NUMBER)</label>
+        <input id="rollInput" class="input" type="number" inputmode="numeric" placeholder="যেমনঃ 2" />
+
+        <button id="searchBtn" class="btn-primary">
+          <span class="icon">🔍</span> ফলাফল দেখুন
+        </button>
+
+        <p id="statusMsg" class="status-msg"></p>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============ পেইজ ২: রেজাল্ট পেইজ (একক শিক্ষার্থী) ============ -->
+  <div id="resultPage" class="page">
+    <main class="wrap wrap-report">
+      <button id="backBtn" class="btn-back no-print">← আবার খুঁজুন</button>
+
+      <section class="card result-card">
+        <div id="reportContainer"></div>
+        <div class="result-actions no-print">
+          <button id="downloadBtn" class="btn-primary">⬇️ ডাউনলোড করুন (PDF)</button>
+          <button id="printBtn" class="btn-secondary">🖨️ প্রিন্ট করুন</button>
+        </div>
+        <p id="downloadStatus" class="status-msg"></p>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============ পেইজ ৩: পরীক্ষার রুটিন ============ -->
+  <div id="routinePage" class="page">
+    <main class="wrap wrap-report">
+      <a href="index.html" id="routineBackBtn" class="btn-back no-print">← মূল পেইজে ফিরে যান</a>
+
+      <section class="card result-card">
+        <div id="routineContainer"></div>
+        <div class="result-actions no-print">
+          <button id="routinePrintBtn" class="btn-secondary">🖨️ প্রিন্ট করুন</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============ পেইজ ৪: এডমিন প্যানেল (গোপন - URL এর শেষে #admin দিলে খুলবে) ============ -->
+  <div id="adminPage" class="page">
+    <main class="wrap">
+      <button id="adminBackBtn" class="btn-back no-print">← মূল পেইজে ফিরে যান</button>
+
+      <section id="adminLogin" class="card search-card no-print">
+        <div class="card-title">🔒 এডমিন লগইন</div>
+        <label class="field-label" for="adminPassword">পাসওয়ার্ড দিন</label>
+        <input id="adminPassword" class="input" type="password" placeholder="পাসওয়ার্ড" />
+        <button id="adminLoginBtn" class="btn-primary">
+          <span class="icon">🔑</span> প্রবেশ করুন
+        </button>
+        <p id="adminLoginMsg" class="status-msg"></p>
+      </section>
+
+      <section id="adminControls" class="card search-card no-print hidden">
+        <div class="card-title">🖨️ সব রেজাল্ট কার্ড প্রিন্ট করুন</div>
+
+        <label class="field-label" for="adminClassSelect">শ্রেণী নির্বাচন করুন</label>
+        <select id="adminClassSelect" class="input">
+          <option value="">লোড হচ্ছে...</option>
+        </select>
+
+        <button id="adminPrintBtn" class="btn-primary">
+          <span class="icon">🖨️</span> রেজাল্ট কার্ড তৈরি করুন
+        </button>
+
+        <p id="adminStatusMsg" class="status-msg"></p>
+      </section>
+
+      <div id="adminPrintArea"></div>
+    </main>
+  </div>
+
+  <!-- হ্যাশ অনুযায়ী সঠিক পেইজ সাথে সাথে দেখানোর জন্য (ভারী স্ক্রিপ্ট লোড হওয়ার অপেক্ষা না করে,
+       যাতে "রুটিন" এ ক্লিক করলে প্রথমে সার্চ পেইজ ফ্ল্যাশ না করে) -->
+  <script>
+    (function(){
+      var hash = window.location.hash;
+      var pageId = "searchPage";
+      if(hash === "#routine") pageId = "routinePage";
+      else if(hash === "#admin") pageId = "adminPage";
+      document.getElementById(pageId).classList.add("active");
+    })();
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
